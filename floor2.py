@@ -5,7 +5,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pickup_map.settings.local')
 import django
 django.setup()
 from django.shortcuts import get_object_or_404
-from algorithms import *
+from floormanage import *
 
 if __name__ == '__main__':
     Point(id=20, name='에스컬레이터2', floor=2, locationX=0, locationY=1, locationZ=0).save()
