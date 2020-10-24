@@ -166,8 +166,11 @@ def findPath(_from, to):
         for i in x:
             pt = get_object_or_404(Point, pk=i)
             l.append([pt.locationX, pt.locationY, pt.locationZ])
+        
+        s_point = [from_store.locationX, from_store.locationY, from_store.locationZ]
+        e_point = [to_store.locationX, to_store.locationY, to_store.locationZ]
         print(l)
-        return l
+        return [l, s_point, e_point]
     else: # 다른 층일 때
         q = toElebator(_from) # 엘리베이터까지 간다
         print(q)
@@ -195,8 +198,13 @@ def findPath(_from, to):
         print(q)
         l = []
         for i in q:
+            print("i=",i)
             pt = get_object_or_404(Point, pk=i)
             l.append([pt.locationX, pt.locationY, pt.locationZ])
             
         print(l)
-        return l
+        s_point = [from_store.locationX, from_store.locationY, from_store.locationZ]
+        e_point = [to_store.locationX, to_store.locationY, to_store.locationZ]
+        # l = 경로들의 좌표
+        # 
+        return [l, s_point, e_point]

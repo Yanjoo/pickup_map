@@ -3,7 +3,7 @@ import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pickup_map.settings.local')
 import django
 django.setup()
-from algorthms import *
+from algorithms import *
 
 
 if __name__ == '__main__':
