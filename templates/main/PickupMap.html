@@ -39,14 +39,14 @@
         var floor = 3
         var root = []
 
-        main(floor, destination, base_position);
+        main(floor, destination, base_position, root);
         animate();
 
-        function main(floor, destination, base_position) {
+        function main(floor, destination, base_position, root) {
 
             initScene(floor, base_position);
             initMisc();
-            initline(destination, base_position);
+            initline(destination, base_position, root);
 
             document.body.appendChild( renderer.domElement);
             window.addEventListener( 'resize', onWindowResize, false);
@@ -106,13 +106,13 @@
             });
             for(var i = 0; i < floor; i++){
                 var ground_cover = new THREE.Mesh( geometry, material);
-
+                // 격자 일단 제거(ground)
                 // THREE.GridHelper( size, divisions );
-                var ground = new THREE.GridHelper(68, 68, 0x000000)
+                //var ground = new THREE.GridHelper(68, 68, 0x000000)
                 //ground_cover.scale.multiplyScalar( 1 );
                 ground_cover.position.y = i*12-1.5;
-                ground.position.y = i*12-1.5;
-                scene.add( ground );
+                //ground.position.y = i*12-1.5;
+                //scene.add( ground );
                 scene.add(ground_cover);
             }
 
@@ -247,13 +247,20 @@
             console.log(destination)
             
             var material = new THREE.LineBasicMaterial({
-                color: 0x000000,
+                color: 0xff4040,
                 // 선두께 ㅅㅂ;; 왜 안됨,,(OpenGL 정책때문에 안되는 거였음;)
                 linewidth: 50,
             });
             
             var points=[];
 
+            for(var i = 0; i < root.length; i++){
+                points.push(new THREE.Vector3(root[i][0], root[i][1], root[i][2]))
+            }
+
+            points.push(new THREE.Vector3(destination[0], destination[1], destination[2]))
+
+            /*
             if (destination[1] == 5){
                 //for 문 돌려서 root 별로 이동하게 하면 될듯
                 points.push(new THREE.Vector3(10, 0, 3));
@@ -289,7 +296,7 @@
                 points.push(new THREE.Vector3(0, 20, 0));
                 points.push(new THREE.Vector3(destination[0], destination[1], destination[2]));
             }
-
+            */
             var geometry = new THREE.BufferGeometry().setFromPoints(points);
             var line = new THREE.Line(geometry, material);
             scene.add(line);
