@@ -164,7 +164,7 @@
 
         // 매장 생성
         function makeStore(x, y, z, labelWidth, size, name, color) {
-            const geometry = new THREE.BoxBufferGeometry(2, 5, 2);
+            const geometry = new THREE.BoxBufferGeometry(2, 3, 2);
 
             const canvas = makeLabelCanvas(labelWidth, size, name);
             const texture = new THREE.CanvasTexture(canvas);
@@ -184,7 +184,7 @@
             });
 
             const store = new THREE.Mesh(geometry, bodyMaterial);
-            store.position.set(x, y*12+1, z)
+            store.position.set(x, y*12, z)
             //const root = new THREE.Object3D();
             //root.position.x = x;
 
@@ -211,8 +211,8 @@
                     // 첫 위치를 위한 사람 모양
             const bodyRadiusTop = .9;
             const bodyRadiusBottom = .5;
-            const bodyHeight = 4;
-            const bodyRadialSegments = 7;
+            const bodyHeight = 5;
+            const bodyRadialSegments = 8;
             const bodyGeometry = new THREE.CylinderBufferGeometry(bodyRadiusTop, bodyRadiusBottom, bodyHeight, bodyRadialSegments);
 
             const headRadius = bodyRadiusTop * 0.8;
@@ -237,6 +237,8 @@
             head.position.y = body.position.y + 2 + headRadius * 1.1;
 
             scene.add(root);
+            
+
             return root;
         }
 
@@ -255,10 +257,12 @@
             var points=[];
 
             for(var i = 0; i < root.length; i++){
-                points.push(new THREE.Vector3(root[i][0], root[i][1]*12 + 2, root[i][2]))
+                points.push(new THREE.Vector3(root[i][0], root[i][1]*12 + 2, root[i][2]));
+                
             }
 
             points.push(new THREE.Vector3(destination[0], destination[1]*12 + 2, destination[2]))
+
 
             /*
             if (destination[1] == 5){
@@ -300,6 +304,30 @@
             var geometry = new THREE.BufferGeometry().setFromPoints(points);
             var line = new THREE.Line(geometry, material);
             scene.add(line);
+            var length = root.length;
+            var i = 0;
+            
+            setInterval(() => {
+                    console.log("1초에 한번 ");
+
+                    console.log("i=" + i);
+                    if (i >= root.length) {
+                        console.log("0으로 바꾼다");
+                        i = 0;
+                    } 
+                    var person = makePerson(root[i][0], root[i][1]*6,root[i][2], 0x5aaef6);   
+                     
+                    console.log("사람 생성 "+ root.length);
+                    setTimeout(() => {
+                        scene.remove(person);
+                        i++;
+                    }, 900);
+                    
+            }, 1000);
+            
+            
+           
+
         }
 
         function initMisc(){
@@ -316,8 +344,8 @@
             controls.update();
             clock = new THREE.Clock();
 
-            stats = new Stats();
-            document.body.appendChild(stats.dom);
+            //stats = new Stats();
+            //document.body.appendChild(stats.dom);
         }
 
         function onWindowResize(){
