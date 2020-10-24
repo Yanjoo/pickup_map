@@ -1,15 +1,15 @@
 .contents-wrapper {
     max-width: 480px;
     width: 100%;
-    height: 100vh;
+    height: 600px;
     margin: 0 auto;
 }
 
 .contents-wrapper .contents {
-    width: 70%;
+    width: 90%;
     max-width: 420px;
     margin: 0 auto;
-    padding-top: 70px;
+    padding-top: 30px;
 }
 
 input[name=search] {
@@ -61,6 +61,7 @@ input[name=search]::placeholder {
     height: auto;
     line-height: normal;
     font-family: inherit;
+    background-color: #ffffff;
     padding: .8em .5em;
     border: 0;
     opacity: 0;
@@ -72,7 +73,7 @@ input[name=search]::placeholder {
 
 .shop-list-box {
     overflow-y: scroll;
-    max-height: 500px;
+    height: 400px;
 }
 
 .shop-list-box ul {
@@ -90,5 +91,16 @@ input[name=search]::placeholder {
     background-color: #f6f6f6;
 }
 
-.path {
+.findpath-box {
+    max-width: 480px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+input[name=start],
+input[name=end] {
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #e0e0e0;
+    display: block;
 }

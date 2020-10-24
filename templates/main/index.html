@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/init.css' %}">
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <link rel="stylesheet" href="{% static 'css/autocomplete.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"
         integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <script src="{% static 'js/search.js' %}"></script>
@@ -19,52 +20,45 @@
 </head>
 
 <body onload="init">
-    <div class="contents-wrapper">
-        <div class="contents">
-            <div class="srch_form autocomplete">
-                <input name="search" id="autoInput" placeholder="매장을 검색해주세요" autocomplete="off">
-            </div>
-            <form action="#" method="get">
-                <div class="path hide">
-                    123
-                </div>
-            </form>
-            <div class="shop">
-                <div class="selectbox">
-                    <label for="ex_select">1층</label>
-                    <select id="ex_select">
-                        <option selected>1층</option>
-                        <option>2층</option>
-                        <option>3층</option>
-                    </select>
-                </div>
-                <div class="shop-list-box">
-                    <input type="hidden" name="shop">
-                    <ul class="shop-list">
-                        <li>설화수</li>
-                        <li>미샤</li>
-                        <li>SK-II</li>
-                        <li>설화수</li>
-                        <li>미샤</li>
-                        <li>SK-II</li>
-                        <li>설화수</li>
-                        <li>미샤</li>
-                        <li>SK-II</li>
-                        <li>설화수</li>
-                        <li>미샤</li>
-                        <li>SK-II</li>
-                    </ul>
-                </div>
-            </div>
+
+    <div class="findpath-box">
+        <input type="text" name="start" id="start" onclick="openModal(id)">
+        <input type="text" name="end" id="end" onclick="openModal(id)">
+        <button>길 찾기</button>
+    </div>
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            {% include 'main/modal.html' %}
 
         </div>
 
     </div>
-
     <script>
         window.onload = function () {
             autocomplete.setAutocomplete(document.getElementById('autoInput'), searchData);
         }
+    </script>
+    <script>
+        var modal = document.getElementById('myModal');
+        var span = document.getElementsByClassName("close")[0];
+
+        function openModal (id) {
+            console.log(id);
+            modal.style.display = "block";
+        }
+
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
     </script>
 </body>
 

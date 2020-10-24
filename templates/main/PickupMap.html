@@ -249,7 +249,7 @@
             var material = new THREE.LineBasicMaterial({
                 color: 0xff4040,
                 // 선두께 ㅅㅂ;; 왜 안됨,,(OpenGL 정책때문에 안되는 거였음;)
-                linewidth: 50,
+                linewidth: 100,
             });
             
             var points=[];
@@ -316,8 +316,8 @@
             controls.update();
             clock = new THREE.Clock();
 
-            stats = new Stats();
-            document.body.appendChild(stats.dom);
+            // stats = new Stats();
+            // document.body.appendChild(stats.dom);
         }
 
         function onWindowResize(){

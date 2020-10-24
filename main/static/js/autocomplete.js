@@ -45,7 +45,7 @@
         b.addEventListener("click", function (e) {
           _inp.value = this.getElementsByTagName("input")[0].value;
           closeAllLists();
-          testLocation();
+          testLocation(_inp.value);
         });
         a.appendChild(b);
       }

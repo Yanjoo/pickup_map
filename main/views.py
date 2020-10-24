@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
 from .models import Point
 from .algorithms import *
@@ -24,24 +24,15 @@ def find(start, end):
     print('시작 좌표', point_start)
     print('종료 좌표', point_end)
 
-def checkLocation(code):
-
-    # 코드 
-
-    return 
-
 def index(request):
-    if request.is_ajax():
-        code = request.GET.get('code','')
-        shop = request.GET.get('shop','')
-        search()
-    else:
-        return render(request, 'main/index.html')
+    return render(request, 'main/index.html')
 
 
 def map(request):
-    start = 1102 # 시작 점
-    end = 3101 # 종료점
+    start = 11 # 시작 점 
+    end = request.GET.get('end','') # 종료점
+    if end == '':
+        return redirect('index')
     paths = findPath(start, end)
     print('=========')
     print('경로', paths)

@@ -13,7 +13,7 @@ $(document).ready(function () {
 
   var shopList = [];
   for (key in floor1) {
-    shopList.push(`<li>${floor1[key]}</li>`);
+    shopList.push(`<li data=${key}>${floor1[key]}</li>`);
   }
   $('.shop-list').html(shopList);
 });
@@ -23,17 +23,23 @@ $("html").on("change", ".selectbox select", function (e) {
   var shopList = [];
   if (e.target.value == "1층") {
     for (key in floor1) {
-      shopList.push(`<li>${floor1[key]}</li>`);
+      shopList.push(`<li data=${key}>${floor1[key]}</li>`);
     }
   } else if (e.target.value == "2층") {
     for (key in floor2) {
-      shopList.push(`<li>${floor2[key]}</li>`);
+      shopList.push(`<li data=${key}>${floor2[key]}</li>`);
     }
   } else if (e.target.value == "3층") {
     for (key in floor3) {
-      shopList.push(`<li>${floor3[key]}</li>`);
+      shopList.push(`<li data=${key}>${floor3[key]}</li>`);
     }
   }
   $('.shop-list').html(shopList);
 
 });
+
+$("html").on("click", ".shop-list li", function (e) {
+  let data = $(e.target).attr('data');
+  location.href = `/map?end=${data}`;
+});
+

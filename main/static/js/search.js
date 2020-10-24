@@ -122,7 +122,24 @@ var searchData = [
 '근화모피',
 '휴테크',]
 
-function testLocation(){
-    location.href = '/map'
+function testLocation(value){
+    let end = '';
+    for (key in floor1) {
+        if (floor1[key] == value) {
+            end = key
+        }
+    }
+    for (key in floor2) {
+        if (floor2[key] == value) {
+            end = key
+        }
+    }
+    for (key in floor3) {
+        if (floor3[key] == value) {
+            end = key
+        }
+    }
+    console.log(end);
+    location.href = `/map?end=${end}`
 }
 
