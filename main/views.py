@@ -31,11 +31,6 @@ def checkLocation(code):
     return 
 
 def index(request):
-<<<<<<< HEAD
-=======
-    
-
->>>>>>> b4ca75d506dcf11b038c701686fbc3ff5fcf7e42
     if request.is_ajax():
         code = request.GET.get('code','')
         shop = request.GET.get('shop','')
