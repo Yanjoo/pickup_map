@@ -8,11 +8,6 @@ def checkLocation(code):
     return 
 
 def index(request):
-    a,b,c = findPath(1102, 2101)
-    print('=========')
-    print(a)
-    print(b)
-    print(c)
     if request.is_ajax():
         code = request.GET.get('code','')
         shop = request.GET.get('shop','')
