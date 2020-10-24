@@ -8,11 +8,16 @@ def checkLocation(code):
     return 
 
 def index(request):
-    a,b,c = findPath(1102, 2101)
+    paths = findPath(1102, 2101)
     print('=========')
-    print(a)
-    print(b)
-    print(c)
+    print(paths)
+    points_list = []
+    for i in paths:
+        pt = get_object_or_404(Point, pk=i)
+        points_list.append([pt.locationX, pt.locationY, pt.locationZ])
+    print(points_list)    
+    
+
     if request.is_ajax():
         code = request.GET.get('code','')
         shop = request.GET.get('shop','')

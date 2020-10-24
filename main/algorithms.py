@@ -170,7 +170,7 @@ def findPath(_from, to):
         s_point = [from_store.locationX, from_store.locationY, from_store.locationZ]
         e_point = [to_store.locationX, to_store.locationY, to_store.locationZ]
         print(l)
-        return [l, s_point, e_point]
+        return x
     else: # 다른 층일 때
         q = toElebator(_from) # 엘리베이터까지 간다
         print(q)
@@ -195,7 +195,7 @@ def findPath(_from, to):
                 begin_floor -= 1
             q.append(begin_elebator)
         q.extend(findPath(begin_elebator, to))
-        print(q)
+        print("q=", q)
         l = []
         for i in q:
             print("i=",i)
@@ -207,4 +207,4 @@ def findPath(_from, to):
         e_point = [to_store.locationX, to_store.locationY, to_store.locationZ]
         # l = 경로들의 좌표
         # 
-        return [l, s_point, e_point]
+        return q

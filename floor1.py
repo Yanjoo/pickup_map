@@ -4,7 +4,7 @@ import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pickup_map.settings.local')
 import django
 django.setup()
-from algorithms import *
+from floormanage import *
     
 if __name__ == '__main__':
     Point(id=10, name='에스컬레이터1', floor=1, locationX=0, locationY=0, locationZ=0).save()
@@ -38,8 +38,6 @@ if __name__ == '__main__':
     Point(126, floor=1, locationX=15, locationY=0, locationZ=10).save()
     Point(127, floor=1, locationX=20, locationY=0, locationZ=10).save()
     Point(128, floor=1, locationX=30, locationY=0, locationZ=10).save()
-    
-     
     
     Point(1101, '더바디샵', 1, -25, 0, -13).save()
     Point(1102, '오휘/후', 1, -18, 0, -12).save()
