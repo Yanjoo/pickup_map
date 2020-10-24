@@ -255,10 +255,10 @@
             var points=[];
 
             for(var i = 0; i < root.length; i++){
-                points.push(new THREE.Vector3(root[i][0], root[i][1], root[i][2]))
+                points.push(new THREE.Vector3(root[i][0], root[i][1]*12 + 2, root[i][2]))
             }
 
-            points.push(new THREE.Vector3(destination[0], destination[1], destination[2]))
+            points.push(new THREE.Vector3(destination[0], destination[1]*12 + 2, destination[2]))
 
             /*
             if (destination[1] == 5){
