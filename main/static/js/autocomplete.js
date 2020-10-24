@@ -1,4 +1,4 @@
-let autocomplete = (function () {
+  let autocomplete = (function () {
   let _inp = null;
   let _arr = [];
   let _currentFoucs;
@@ -45,6 +45,7 @@ let autocomplete = (function () {
         b.addEventListener("click", function (e) {
           _inp.value = this.getElementsByTagName("input")[0].value;
           closeAllLists();
+          testLocation();
         });
         a.appendChild(b);
       }

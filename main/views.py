@@ -15,3 +15,8 @@ def index(request):
         search()
     else:
         return render(request, 'main/index.html')
+
+
+def map(request):
+
+    return render(request, 'main/PickupMap.html')

@@ -1,0 +1,347 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lotte!!</title>
+    <meta name='viewport' content='width=device-width, user-scalable=no'/>
+
+    <body>
+        <div> PickUP Map!!</div>
+    </body>
+    <script type="module">
+        import * as Three from "{% static 'three.js-master/build/three.js' %}"
+        import Stats from "{% static 'three.js-master/examples/jsm/libs/stats.module.js' %}"
+        import { KMZLoader} from "{% static 'three.js-master/examples/jsm/loaders/KMZLoader.js' %}"
+        import {OrbitControls} from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/controls/OrbitControls.js';
+        import {GUI} from 'https://threejsfundamentals.org/threejs/../3rdparty/dat.gui.module.js';
+        import { Line2 } from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/lines/Line2.js';
+		import { LineMaterial } from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/lines/LineMaterial.js';
+		import { LineGeometry } from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/lines/LineGeometry.js';
+        
+        var camera, scene, renderer, clock, stats, light;
+        var location;
+        // 좌표 설정해오기
+        var maejang_location = [[-25, 0, -13,"더바디샵"],[-25, 0, -8,"설화수"],[-25,0,5,"불가리퍼퓸"],[-18,0,-12,"오휘 / 후"],[-20,0,-7,"SK-II"],[-20,0,-3,"헤라"],[-20,0,2,"숨 37"],[-20,0,8,"동인비"],[0,0,0,"엘리베이터"],
+        [-18,0,13,"비오템"],[-18, 0, 2,"클라랑스"],[-18,0,8,"비다벨로"],[-13,0,-12,"키엘"],[-13,0,-5,"Dior"],[-13,0,5,"에스티로더"],[-13,0,13,"랑콤"],[-8,0,-12,"라스트핏"],[-8,0,-5,"빌리프"],[0,0,-5,"메이크업포에버"],[-2,0,4,"샤넬"],
+        [5,0,-5,"베네피트"],[2,0,4,"대니멕켄지"],[10,0,-12,"스와치그룹 멀티샵"],[12.5,0,-7.5,"제이에스티나"],[12.5,0,-2.5,"스와로브스키"],[12.5,0,2.5,"스톤헨지"],[13,0,13,"메트로시티"],[12.5,0,7.5,"파슬"],[17.5,0,-7.5,"젬크레인"],[17.5,0,-2.5,"골든듀"],
+        [17.5,0,5,"갤러리아클락"],[22,0,-12,"TOPS"],[22,0,-7.5,"자파즈"],[25,0,-5,"시즌잡화"],[27.5,0,2.5,"루바니"],[27.5,0,7.5,"피에르가르뎅"],[27,0,13,"폴바셋"],[32,0,-12,"하우스오브쌤소나이트"],[32,0,-5,"엔클라인"],[32,0,2,"닥스"],[32,0,7.5,"루이까또즈"],
+        [-25,1, -12,"토모톰스"],[-27,1,-5,"톰보이"],[-25,1,2,"스튜디오럭스"],[-18,1,-12,"에고이스트"],[-20,1,-7.5,"ab f.z."],[-20,1,-2.5,"마리앤"],[-20,1,2.5,"꾸즈"],[-20,1,7.5,"루코루코"],[-20,1,13,"타미힐피거 여성"],[-13,1,-12,"이프네"],[-15,1,-7.5,"담다"],
+        [-15,1,-2.5,"SOUP"],[-15,1,2.5,"밸리걸"],[-15,1,7.5,"리안뉴욕"],[-13,1,13,"헤지스 레이디스"],[-5,1,-12,"올리브데올리브"],[-5,1,-5,"난닝구"],[-5,1,5,"르피타"],[-7,1,13,"빈폴 레이디스"],[10,1,-12,"듀엘"],[5,1,-5,"이엔씨"],[2,1,5,"온앤온"],[3,1,13,"쥬시쥬디"],[15,1,-12,"주크"],
+        [15,1,-7.5,"폴스부띠끄 / 세컨스킨"],[15,1,2.5,"반에이크"],[12,1,13,"잇미샤"],[17,1,13,"로엠"],[20,1,-12,"베네통"],[25,1,-5,"GGPX"],[23,1,5,"케네스레이디"],[25,1,13,"JJ지고트"],[30,1,-12,"르니앤맥코이"],[32,1,-8,"시슬리"],[32,1,-3,"오즈세컨"],[32,1,2,"보브"],[0,1,0,"엘리베이터"],
+        [32,1,8,"라인"],[32,1,13,"리스트"],[-25,2,-15,"시크릿우먼"],[-27,2,-12,"부르다문"],[-26,2,-5,"시스막스"],[-25,2,2,"루치아노최"],[-25,2,7.5,"빈루즈"],[-18,2,-12,"마담포라"],[-20,2,-7.5,"에스투피"],[-20,2,-2.5,"에스깔리에"],[-21,2,5,"이동수"],[-20,2,13,"몬테밀라노"],
+        [-13,2,-12,"닥스"],[-15,2,-7.5,"벨리시앙"],[-15,2,-2.5,"정호진"],[-16,2,2.5,"리베도"],[-16,2,7.5,"올리비아하슬러"],[-17,2,13,"레노마레이디"],[-12,2,13,"크로커다일"],[-5,2,-12,"리본"],[-7,2,-5,"로잔"],[0,2,-5,"뽀뜨레"],[-3.5,2,5,"엠씨"],[-8,2,13,"더람"],[0,2,0,"엘리베이터"],
+        [0,2,13,"우바"],[5,2,-12,"비비안"],[7,2,-5,"베띠앙뜨"],[5,2,5,"요하넥스"],[8,2,13,"아이잗바바"],[11,2,-12,"비너스"],[14,2,-12,"와코루"],[15,2,-7.5,"에스콰이아"],[15,2,-2.5,"바이네르"],[15,2,2.5,"미소페"],[15,2,7.5,"트리아나"],[13,2,13,"크레송"],[21,2,-12,"금강 / 랜드로바"],
+        [25,2,-7.5,"엘칸토"],[25,2,-2.5,"닥스"],[25,2,2.5,"마켓"],[25,2,7.5,"리아트"],[22,2,13,"근화모피"],[30,2,-15,"세라젬"],[33,2,-6,"소다"],[33,2,5,"탠디"],[28,2,13,"휴테크"]]
+        var destination = [-5, 20, 10]
+        var base_position = [0, 0, 25] // 시작위치는 25
+        var floor = 3
+        var root = []
+
+        main(floor, destination, base_position);
+        animate();
+
+        function main(floor, destination, base_position) {
+
+            initScene(floor, base_position);
+            initMisc();
+            initline(destination, base_position);
+
+            document.body.appendChild( renderer.domElement);
+            window.addEventListener( 'resize', onWindowResize, false);
+        }
+
+        // 초기위치를 사람 모양, 가게 이름은 사각 기둥에 위에 이름표 띄워놓기
+        function initScene(floor, base_position){
+            // 카메라 세팅(fov, aspect, near, far)
+            // fov는 시야각(값이 커질수록 멀어짐)
+            // asperct는 canvas 가로 세로 비율임(이건 그냥 국룰 따라가는게 나을듯)
+            // near와 far은 렌더링되는 공간범위! 이건 좁게 설정하면 피사체가 잘려나감 무조건 크게
+            camera = new THREE.PerspectiveCamera( 130, window.innerWidth / window.innerHeight, 1, 2000);
+            // 첫 카메라 포지션 잡음(x, y, z) 참고로 좌, 우가 x축이고 z는 앞, 뒤이고 y가 위, 아래임
+            camera.position.set( 0, 10, 35);
+
+            // Scene 선언
+            scene = new THREE.Scene();
+
+            // 말 그대로 배곃색
+            scene.background = new THREE.Color(0xFFFFFF);
+
+            // 조명색이라고 생각하면됨. 모든 오브젝트를 비춰줌, 그림자 X
+            scene.add(new THREE.AmbientLight(0xeeeeee));
+
+            // 전체 후광 효과 주기 위해 DirectionalLight(한 방향으로 비추는 Light) 이용
+            light = new THREE.DirectionalLight( 0xFFFFFF, 1);
+            light.position.set(0, 20, 0);
+            scene.add(light);
+
+            makePerson(base_position[0], base_position[1],base_position[2], 0x5aaef6)
+            /* 기본 오브젝트, radis, tube, tubularSegments, radialSegments, p, q 순
+            var geometry = new THREE.TorusKnotBufferGeometry( 25, 8, 75, 20);
+            // MeshPhongMaterial은 반사 하이라이트있는 반짝이는 표면 재질(고급스러움을 더 하기 위함)
+            var material = new THREE.MeshPhongMaterial({
+                color: 0x0000a0,
+                shininess: 150,
+                specular : 0x222222
+            });
+            // Mesh 메소드를 이용해서 선언한 geometry랑 material 결합 한 오브젝트 생성
+            location = new THREE.Mesh( geometry, material);
+            // 스케일 지정
+            location.scale.multiplyScalar( 1/30 );
+            // 초기 위치 치정 <- QR코드랑 어떻게 비벼봐야하고,,,,
+            //location.position.set(0, 0, 20)
+            location.position.x = base_position[0]
+            location.position.y = base_position[1]
+            location.position.z = base_position[2]
+            scene.add( location );
+            */
+
+            //백화점 층 바닥(width, height, depth)
+            var geometry = new THREE.BoxBufferGeometry( 68, 0.15, 40);
+            var material = new THREE.MeshBasicMaterial({
+                color : 0xeee6c4,
+                transparent: true,
+                opacity: 0.7
+            });
+            for(var i = 0; i < floor; i++){
+                var ground_cover = new THREE.Mesh( geometry, material);
+
+                // THREE.GridHelper( size, divisions );
+                var ground = new THREE.GridHelper(68, 68, 0x000000)
+                //ground_cover.scale.multiplyScalar( 1 );
+                ground_cover.position.y = i*12-1.5;
+                ground.position.y = i*12-1.5;
+                scene.add( ground );
+                scene.add(ground_cover);
+            }
+
+            // 매장 배열로 받아서 위치 별로 사각형으로 세팅
+            //var geometry = new THREE.BoxBufferGeometry(3, 3, 3);
+            //var maejang_fig = new THREE.MeshLambertMaterial( { color: 0xfeb74c, map: new THREE.TextureLoader().load( '/three.js-master/examples/textures/square-outline-textured.png' ) } );
+            for(var j = 0; j < maejang_location.length; j++){
+                //var maejang = new THREE.Mesh(geometry, maejang_fig);
+                //maejang.position.set(maejang_location[j][0], maejang_location[j][1]*12, maejang_location[j][2]);
+                //scene.add(maejang)
+               
+                // 그냥 모듈화 시킴
+                makeStore(maejang_location[j][0], maejang_location[j][1], maejang_location[j][2], 500, 100,maejang_location[j][3], 0xedacb1);
+            }
+        }
+
+        //매장 이름표 함수
+        function makeLabelCanvas(baseWidth, size, name) {
+            const borderSize = 4;
+            const ctx = document.createElement('canvas').getContext('2d');
+            const font =  `${size}px bold sans-serif`;
+            ctx.font = font;
+            // measure how long the name will be
+            const textWidth = ctx.measureText(name).width;
+
+            const doubleBorderSize = borderSize * 2;
+            const width = baseWidth + doubleBorderSize;
+            const height = size + doubleBorderSize;
+            ctx.canvas.width = width;
+            ctx.canvas.height = height;
+
+            // need to set font again after resizing canvas
+            ctx.font = font;
+            ctx.textBaseline = 'middle';
+            ctx.textAlign = 'center';
+
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, width, 0);
+
+            // scale to fit but don't stretch
+            const scaleFactor = Math.min(1, baseWidth / textWidth);
+            ctx.translate(width / 2, height / 2);
+            ctx.scale(scaleFactor, 1);
+            ctx.fillStyle = 'black';
+            ctx.fillText(name, 0, 0);
+
+            return ctx.canvas;
+        }
+
+        // 매장 생성
+        function makeStore(x, y, z, labelWidth, size, name, color) {
+            const geometry = new THREE.BoxBufferGeometry(2, 5, 2);
+
+            const canvas = makeLabelCanvas(labelWidth, size, name);
+            const texture = new THREE.CanvasTexture(canvas);
+            // because our canvas is likely not a power of 2
+            // in both dimensions set the filtering appropriately.
+            texture.minFilter = THREE.LinearFilter;
+            texture.wrapS = THREE.ClampToEdgeWrapping;
+            texture.wrapT = THREE.ClampToEdgeWrapping;
+
+            const labelMaterial = new THREE.SpriteMaterial({
+            map: texture,
+            transparent: true,
+            });
+            const bodyMaterial = new THREE.MeshPhongMaterial({
+            color,
+            flatShading: true,
+            });
+
+            const store = new THREE.Mesh(geometry, bodyMaterial);
+            store.position.set(x, y*12+1, z)
+            //const root = new THREE.Object3D();
+            //root.position.x = x;
+
+            //const body = new THREE.Mesh(geometry, bodyMaterial);
+            //root.add(body);
+            //body.position.y = bodyHeight / 2;
+
+            // if units are meters then 0.01 here makes size
+            // of the label into centimeters.
+            const labelBaseScale = 0.01;
+            const label = new THREE.Sprite(labelMaterial);
+            store.add(label);
+            label.position.y = y+3
+
+            label.scale.x = canvas.width  * labelBaseScale;
+            label.scale.y = canvas.height * labelBaseScale;
+
+            scene.add(store);
+            return store;
+        }
+        
+        // 초기 사용자 위치
+        function makePerson(x, y, z, color) {
+                    // 첫 위치를 위한 사람 모양
+            const bodyRadiusTop = .9;
+            const bodyRadiusBottom = .5;
+            const bodyHeight = 4;
+            const bodyRadialSegments = 7;
+            const bodyGeometry = new THREE.CylinderBufferGeometry(bodyRadiusTop, bodyRadiusBottom, bodyHeight, bodyRadialSegments);
+
+            const headRadius = bodyRadiusTop * 0.8;
+            const headLonSegments = 12;
+            const headLatSegments = 5;
+            const headGeometry = new THREE.SphereBufferGeometry(headRadius, headLonSegments, headLatSegments);
+
+            const bodyMaterial = new THREE.MeshPhongMaterial({
+            color,
+            flatShading: true,
+            });
+
+            const root = new THREE.Object3D();
+            root.position.set(x, y, z)
+
+            const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+            root.add(body);
+            body.position.y = root.position.y + 1;
+
+            const head = new THREE.Mesh(headGeometry, bodyMaterial);
+            root.add(head);
+            head.position.y = body.position.y + 2 + headRadius * 1.1;
+
+            scene.add(root);
+            return root;
+        }
+
+        //makePerson(-3, 3, 'purple');
+
+        //목적지를 향한 선 그리는 부분
+        function initline(destination, base_position, root){
+            console.log(destination)
+            
+            var material = new THREE.LineBasicMaterial({
+                color: 0x000000,
+                // 선두께 ㅅㅂ;; 왜 안됨,,(OpenGL 정책때문에 안되는 거였음;)
+                linewidth: 50,
+            });
+            
+            var points=[];
+
+            if (destination[1] == 5){
+                //for 문 돌려서 root 별로 이동하게 하면 될듯
+                points.push(new THREE.Vector3(10, 0, 3));
+                points.push(new THREE.Vector3(0, 0, 0));
+                points.push(new THREE.Vector3(0, 5, 0));
+                points.push(new THREE.Vector3(destination[0], destination[1], destination[2]));
+            }
+
+            if (destination[1] == 10){
+                points.push(new THREE.Vector3(base_position[0], base_position[1], base_position[2]));
+                points.push(new THREE.Vector3(10, 0, 3));
+                points.push(new THREE.Vector3(0, 0, 0));
+                points.push(new THREE.Vector3(0, 5, 0));
+                points.push(new THREE.Vector3(0, 10, 0));
+                points.push(new THREE.Vector3(destination[0], destination[1], destination[2]));
+            }
+            if (destination[1] == 15){
+                points.push(new THREE.Vector3(base_position[0], base_position[1], base_position[2]));
+                points.push(new THREE.Vector3(10, 0, 3));
+                points.push(new THREE.Vector3(0, 0, 0));
+                points.push(new THREE.Vector3(0, 5, 0));
+                points.push(new THREE.Vector3(0, 10, 0));
+                points.push(new THREE.Vector3(0, 15, 0));
+                points.push(new THREE.Vector3(destination[0], destination[1], destination[2]));
+            }
+            if (destination[1] == 20){
+                points.push(new THREE.Vector3(base_position[0], base_position[1], base_position[2]));
+                points.push(new THREE.Vector3(10, 0, 3));
+                points.push(new THREE.Vector3(0, 0, 0));
+                points.push(new THREE.Vector3(0, 5, 0));
+                points.push(new THREE.Vector3(0, 10, 0));
+                points.push(new THREE.Vector3(0, 15, 0));
+                points.push(new THREE.Vector3(0, 20, 0));
+                points.push(new THREE.Vector3(destination[0], destination[1], destination[2]));
+            }
+
+            var geometry = new THREE.BufferGeometry().setFromPoints(points);
+            var line = new THREE.Line(geometry, material);
+            scene.add(line);
+        }
+
+        function initMisc(){
+            //wdbgl은 렌더러임. antialias는 가장자리를 매끄럽게 하는 기능
+            renderer = new THREE.WebGLRenderer({antialias: true});
+            //캔버스가 흐려지는거 방지
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            
+            // 카메라를 회전시킬 수 있도록 해주는 변수 선언
+            var controls = new OrbitControls( camera, renderer.domElement );
+            // 카메라 초기 위치 세팅
+            controls.target.set(0,2,0);
+            controls.update();
+            clock = new THREE.Clock();
+
+            stats = new Stats();
+            document.body.appendChild(stats.dom);
+        }
+
+        function onWindowResize(){
+            // 마우스로 사이즈 조절
+            // aspect를 그때그때 조절
+            camera.aspect = window.innerWidth / window.innerHeight;
+            // 카메라 투영 매트릭스를 업데이트. 매개 변수 변경 후에 호출해야함
+            camera.updateProjectionMatrix();
+
+            // 캔버스 size를 계속 업뎃
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        // 계속 애니메이션을 돌리기 위함 위한 함수
+        function animate(){
+            requestAnimationFrame(animate);
+            render();
+
+            stats.update();
+        }
+
+        function renderScene(){
+            renderer.render(scene, camera);
+        }
+
+        // 피사체 돌려보리기
+        function render(){
+            var delta = clock.getDelta();
+
+            renderScene();
+            //location.rotation.y += 2 * delta;
+        }
+    </script>
+</html>

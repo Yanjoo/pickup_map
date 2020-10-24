@@ -20,9 +20,20 @@ input[name=search] {
     border: 1px solid #e0e0e0;
     background-color: #ffffff;
     font-size: 1.6rem;
+    box-sizing: border-box;
 }
 
 input[name=search]::placeholder {
     color: #b4b4b4;
 }
 
+select[name=floor] {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #ffffff;
+}
+
+.shop-list ul {
+    list-style: none;
+}
