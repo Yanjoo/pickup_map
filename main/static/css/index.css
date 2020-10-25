@@ -30,7 +30,7 @@ input[name=search]::placeholder {
     position: relative;
     margin-top: 20px;
     width: 100%;
-    border: 1px solid #ff4040;
+    border: 1px solid #da291c;
     border-radius: 20px;
     z-index: 1;
   }
@@ -44,7 +44,7 @@ input[name=search]::placeholder {
     margin-top: -1px;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 5px solid #ff4040;
+    border-top: 5px solid #da291c;
   }
   
   .selectbox label {
@@ -52,7 +52,7 @@ input[name=search]::placeholder {
     top: 3px;
     left: 20px;
     font-size: 2rem;
-    color: #ff4040;
+    color: #da291c;
     z-index: -1;
   }
   
@@ -73,7 +73,8 @@ input[name=search]::placeholder {
 
 .shop-list-box {
     overflow-y: scroll;
-    height: 400px;
+    margin-top: 20px;
+    height: 420px;
 }
 
 .shop-list-box ul {
@@ -97,10 +98,64 @@ input[name=search]::placeholder {
     margin: 0 auto;
 }
 
-input[name=start],
-input[name=end] {
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.logo img {
+    width: 80px;
+    height: 80px;
+}
+.logo-text {
+    font-size: 4rem;
+    color: #da291c;
+    font-weight: 400;
+}
+
+.exchange-btn {
+    display: flex;
+    width: fit-content;
+    margin: 0 auto;
+    padding: 1rem;
+    font-size: 3rem !important;
+    color: #da291c;
+}
+.exchange-btn:hover {
+    color: #da291c;
+}
+
+.fa-exchange {
+}
+
+.findpath-box input {
     display: block;
     margin: 0 auto;
     border: 1px solid #e0e0e0;
     display: block;
+    width: 80%;
+    padding: 1.5rem 1rem;
+    font-size: 1.7rem;
+}
+
+input[name=start] {
+
+}
+input[name=end] {
+}
+
+#findpath {
+    text-align: center;
+    cursor: pointer;
+    display: block;
+    margin: 30px auto;
+    width: 80%;
+    padding: 1rem 1rem;
+    font-size: 2rem;
+    border: none;
+    background-color: #da291c;
+    color: #ffffff;
 }

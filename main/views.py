@@ -29,7 +29,7 @@ def index(request):
 
 
 def map(request):
-    start = 11 # 시작 점 
+    start = request.GET.get('start','11') # 시작 점 
     end = request.GET.get('end','') # 종료점
     if end == '':
         return redirect('index')

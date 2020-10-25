@@ -10,6 +10,13 @@
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <link rel="stylesheet" href="{% static 'css/autocomplete.css' %}">
     <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+  />
+    <script>
+        var modalFlag = '';
+    </script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"
         integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <script src="{% static 'js/search.js' %}"></script>
@@ -20,11 +27,20 @@
 </head>
 
 <body onload="init">
-
+    <div class="logo">
+        <img src="{% static 'img/logo.png' %}">
+        <div class="logo-text">스마트 맵</div>
+    </div>
     <div class="findpath-box">
-        <input type="text" name="start" id="start" onclick="openModal(id)">
-        <input type="text" name="end" id="end" onclick="openModal(id)">
-        <button>길 찾기</button>
+        <input type="hidden" name="startCode" id="startCode">
+        <input type="hidden" name="endCode" id="endCode">
+        <input type="text" name="start" id="start" onclick="openModal(id)" placeholder="출발지점을 선택해주세요." autocomplete="off">
+        <div class="exchange-btn"><i class="fa fa-exchange" aria-hidden="true"></i></div>
+        <input type="text" name="end" id="end" onclick="openModal(id)" placeholder="도착지점을 선택해주세요." autocomplete="off">
+        <div id="findpath" onclick="findPath()">
+            <i class="fa fa-search" aria-hidden="true"></i>
+             검색
+        </div>
     </div>
     <div id="myModal" class="modal">
         <!-- Modal content -->
@@ -46,6 +62,7 @@
 
         function openModal (id) {
             console.log(id);
+            modalFlag = id;
             modal.style.display = "block";
         }
 

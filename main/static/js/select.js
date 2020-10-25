@@ -40,6 +40,11 @@ $("html").on("change", ".selectbox select", function (e) {
 
 $("html").on("click", ".shop-list li", function (e) {
   let data = $(e.target).attr('data');
-  location.href = `/map?end=${data}`;
+  let text = $(e.target).text();
+  
+  $('#'+modalFlag+'Code').val(data);
+  $('#'+modalFlag).val(text);
+  
+  modal.style.display = 'none';
 });
 

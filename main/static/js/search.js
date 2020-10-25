@@ -139,7 +139,19 @@ function testLocation(value){
             end = key
         }
     }
-    console.log(end);
-    location.href = `/map?end=${end}`
+
+  $('#'+modalFlag+'Code').val(end);
+  $('#'+modalFlag).val(value);
+
+  modal.style.display = 'none';
+    
 }
+var findPath = $('#findpath');
+
+$('html').on('click', '#findpath', function(e){
+    var start = $('#startCode').val();
+    var end = $('#endCode').val();
+    
+    location.href = `/map?start=${start}&end=${end}`;
+})
 
