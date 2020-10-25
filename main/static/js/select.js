@@ -48,3 +48,23 @@ $("html").on("click", ".shop-list li", function (e) {
   modal.style.display = 'none';
 });
 
+$("html").on("click", ".exchange-btn .fa", function (e) {
+  console.log(e.target);
+
+  let startCode = $('#startCode');
+  let startName = $('#start');
+  let endCode = $('#endCode');
+  let endName = $('#end');
+
+  let tempCode = '';
+  let tempName = '';
+  tempCode = startCode.val()
+  tempName = startName.val();
+
+  startCode.val(endCode.val());
+  startName.val(endName.val());
+
+  endCode.val(tempCode);
+  endName.val(tempName);
+});
+
