@@ -30,7 +30,7 @@ input[name=search]::placeholder {
     position: relative;
     margin-top: 20px;
     width: 100%;
-    border: 1px solid #da291c;
+    border: 1px solid #9c1e4e;
     border-radius: 20px;
     z-index: 1;
   }
@@ -44,7 +44,7 @@ input[name=search]::placeholder {
     margin-top: -1px;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 5px solid #da291c;
+    border-top: 5px solid #9c1e4e;
   }
   
   .selectbox label {
@@ -52,7 +52,7 @@ input[name=search]::placeholder {
     top: 3px;
     left: 20px;
     font-size: 2rem;
-    color: #da291c;
+    color: #9c1e4e;
     z-index: -1;
   }
   
@@ -112,7 +112,7 @@ input[name=search]::placeholder {
 }
 .logo-text {
     font-size: 4rem;
-    color: #da291c;
+    color: #9c1e4e;
     font-weight: 400;
 }
 
@@ -122,10 +122,10 @@ input[name=search]::placeholder {
     margin: 0 auto;
     padding: 1rem;
     font-size: 3rem !important;
-    color: #da291c;
+    color: #9c1e4e;
 }
 .exchange-btn:hover {
-    color: #da291c;
+    color: #9c1e4e;
 }
 
 .fa-exchange {
@@ -156,6 +156,6 @@ input[name=end] {
     padding: 1rem 1rem;
     font-size: 2rem;
     border: none;
-    background-color: #da291c;
+    background-color: #9c1e4e;
     color: #ffffff;
 }
