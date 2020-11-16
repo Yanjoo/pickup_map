@@ -164,7 +164,6 @@ dmypy.json
 *.code-workspace
 
 .venv/
-.main/static/three.js-master
 .secrets.json
 
 # End of https://www.toptal.com/developers/gitignore/api/django,vscode
