@@ -103,9 +103,9 @@ def toElebator(_from):
 
     end_points = []
     if floor == 1: # 1층일 때
-        end_points.extend([116, 117])
+        end_points.extend([6, 7])
     elif floor == 2:
-        end_points.extend([27, 28])
+        end_points.extend([26, 27])
     else:
         end_points.extend([36, 37])
     distance = 1000
@@ -125,7 +125,7 @@ def toElebator(_from):
     done = False
     dfs(point_begin, visited, q, point_end, 1, distance)
     q.append(point_begin)
-    print("경로", list(q)[::-1])
+    print("엘리베이터 경로", list(q)[::-1])
     return list(q)[::-1]
     
 
@@ -160,7 +160,7 @@ def findPath(_from, to):
         done = False
         dfs(point_begin, visited, q, point_end, 1, distance)
         q.append(point_begin)
-        print("경로", list(q)[::-1])
+        print("총 경로", list(q)[::-1])
         x = list(q)[::-1]
         l = []
         for i in x:
@@ -177,8 +177,8 @@ def findPath(_from, to):
         begin_floor = from_store.floor # 시작 층
         end_floor = to_store.floor # 목적지 층
         
-        begin_elebator = 10
-        if begin_floor == 1: begin_elebator = 10
+        begin_elebator = 0
+        if begin_floor == 1: begin_elebator = 0
         elif begin_floor == 2: begin_elebator = 20
         else: begin_elebator = 30 
         
