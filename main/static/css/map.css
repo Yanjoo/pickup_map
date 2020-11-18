@@ -38,12 +38,14 @@ a {
     display: block;
     /* margin: 30px auto; */
     text-align: center;
-    margin: 20px auto;
+    margin-left: 20px;
     width: 100%;
     padding: 1rem 1rem;
-
-    
+    position: absolute;
+    z-index: 1000;
 }
 input{
-text-align: center;
+    margin-left: 20px;
+    text-align: center;
+    width: 30%;
 }
