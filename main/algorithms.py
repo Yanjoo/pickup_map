@@ -4,42 +4,6 @@ import django
 django.setup()
 from main.models import Point
 from django.shortcuts import get_object_or_404
-
-def connectPoints(point, *points):
-    pt = get_object_or_404(Point, pk=point) # 포인트 노드를 찾음
-    for i in points:
-        x = get_object_or_404(Point, pk=i) # 연결할 포인트
-        data = str(point)+","   # 연결할 포인트에 현재 포인트 추가
-        x.connectPoints += data 
-        x.save()
-        
-        data = str(i)+","   # 포인트에 연결할 포인트를 추가
-        pt.connectPoints += data
-    pt.save()
-
-def connectMarketAndPoint(market, *points):
-    mk = get_object_or_404(Point, pk=market)
-    for i in points:
-        pt = get_object_or_404(Point, pk=i)
-        data = str(market)+","
-        pt.connectMarkets += data
-        pt.save()
-        
-        data = str(i)+","
-        mk.connectPoints += data
-    mk.save()
-    
-def connectPointAndMarket(point, *markets):
-    pt = get_object_or_404(Point, pk=point)
-    for i in markets:
-        data = str(point)+","
-        mk = get_object_or_404(Point, pk=i)
-        mk.connectPoints += data
-        mk.save()
-        data = str(i)+","
-        pt.connectMarkets += data
-    pt.save()
-    
 from collections import deque
 
 # BFS 메서드 정의
@@ -103,11 +67,11 @@ def toElebator(_from):
 
     end_points = []
     if floor == 1: # 1층일 때
-        end_points.extend([6, 7])
+        end_points.extend([0])
     elif floor == 2:
-        end_points.extend([26, 27])
+        end_points.extend([20])
     else:
-        end_points.extend([36, 37])
+        end_points.extend([40])
     distance = 1000
     point_begin, point_end = 0, 0
     for s in start_points:
@@ -173,25 +137,25 @@ def findPath(_from, to):
         return x
     else: # 다른 층일 때
         q = toElebator(_from) # 엘리베이터까지 간다
-        print(q)
+        print('엘리베이터 경로', q)
         begin_floor = from_store.floor # 시작 층
         end_floor = to_store.floor # 목적지 층
         
-        begin_elebator = 0
-        if begin_floor == 1: begin_elebator = 0
-        elif begin_floor == 2: begin_elebator = 20
-        else: begin_elebator = 30 
+        begin_elebator = 100
+        if begin_floor == 1: begin_elebator = 100
+        elif begin_floor == 2: begin_elebator = 200
+        else: begin_elebator = 300
         
         if begin_floor < end_floor: # 올라가는 경우
             while begin_floor != end_floor:
                 q.append(begin_elebator)
-                begin_elebator += 10
+                begin_elebator += 100
                 begin_floor += 1
             q.append(begin_elebator)
         else: # 내려가는 경우
             while begin_floor != end_floor:
                 q.append(begin_elebator)
-                begin_elebator -= 10
+                begin_elebator -= 100
                 begin_floor -= 1
             q.append(begin_elebator)
         q.extend(findPath(begin_elebator, to))

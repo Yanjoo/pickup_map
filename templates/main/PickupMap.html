@@ -3,20 +3,30 @@
 <html lang="ko">
 
 <head>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lotte!!</title>
+    <title>SW MAP</title>
     <meta name='viewport' content='width=device-width, user-scalable=no' />
     <link rel="stylesheet" href="{% static 'css/init.css' %}">
     <link rel="stylesheet" href="{% static 'css/map.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
+ 
 <body>
-    <div class="logo">
-        <a href="{% url 'index' %}">
-        <img src="{% static 'img/logo.png' %}">
-        <div class="logo-text">스마트 맵</div>
-    </a>
-    </div>
+
+        <div class="search">
+            <div class="logo">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'img/logo.png' %}" >
+                </a>
+            </div>
+                <input type="text" placeholder="검색어를 입력해주세요." size="30">
+                <a class="btn btn-default btn-lg"style="border:none;"> 
+                    <span class="glyphicon glyphicon-search"></span>
+                </a>
+            </div>
+        
 </body>
 <script type="module">
     import * as Three from "{% static 'three.js-master/build/three.js' %}"
@@ -37,16 +47,16 @@
     [-15, 1, -5, '박명호 교수'], [-12.5, 1, -5, '초빙교수실 지역선도대학'], [-10, 1, -5, '문현주 교수'], [-7.5, 1, -5, '스마트팩토리 실습실'], [-5, 1, -5, '강재구 교수'], [10, 1, -5, '소프트웨어학과 학과사무실'], [12.5, 1, -5, ''], [15, 1, -5, '교양컴퓨터사무실'], [17.5, 1, -5, '교육 준비실 2'], [22.5, 1, -5, '교육사업지원실 3'],
     [27, 1, -5, '대학원 강의실'], [0, 1, -5, '학부생 스터디룸']
     ];
-    
-    [[17.5, 0, -2.5, "골든듀"],
-    [17.5, 0, 5, "갤러리아클락"], [22, 0, -12, "TOPS"], [22, 0, -7.5, "자파즈"], [25, 0, -5, "시즌잡화"], [27.5, 0, 2.5, "루바니"], [27.5, 0, 7.5, "피에르가르뎅"], [27, 0, 13, "폴바셋"], [32, 0, -12, "하우스오브쌤소나이트"], [32, 0, -5, "엔클라인"], [32, 0, 2, "닥스"], [32, 0, 7.5, "루이까또즈"],
-    [-25, 1, -12, "토모톰스"], [-27, 1, -5, "톰보이"], [-25, 1, 2, "스튜디오럭스"], [-18, 1, -12, "에고이스트"], [-20, 1, -7.5, "ab f.z."], [-20, 1, -2.5, "마리앤"], [-20, 1, 2.5, "꾸즈"], [-20, 1, 7.5, "루코루코"], [-20, 1, 13, "타미힐피거 여성"], [-13, 1, -12, "이프네"], [-15, 1, -7.5, "담다"],
-    [-15, 1, -2.5, "SOUP"], [-15, 1, 2.5, "밸리걸"], [-15, 1, 7.5, "리안뉴욕"], [-13, 1, 13, "헤지스 레이디스"], [-5, 1, -12, "올리브데올리브"], [-5, 1, -5, "난닝구"], [-5, 1, 5, "르피타"], [-7, 1, 13, "빈폴 레이디스"], [10, 1, -12, "듀엘"], [5, 1, -5, "이엔씨"], [2, 1, 5, "온앤온"], [3, 1, 13, "쥬시쥬디"], [15, 1, -12, "주크"],
-    [15, 1, -7.5, "폴스부띠끄 / 세컨스킨"], [15, 1, 2.5, "반에이크"], [12, 1, 13, "잇미샤"], [17, 1, 13, "로엠"], [20, 1, -12, "베네통"], [25, 1, -5, "GGPX"], [23, 1, 5, "케네스레이디"], [25, 1, 13, "JJ지고트"], [30, 1, -12, "르니앤맥코이"], [32, 1, -8, "시슬리"], [32, 1, -3, "오즈세컨"], [32, 1, 2, "보브"], [0, 1, 0, "엘리베이터"],
-    [32, 1, 8, "라인"], [32, 1, 13, "리스트"], [-25, 2, -15, "시크릿우먼"], [-27, 2, -12, "부르다문"], [-26, 2, -5, "시스막스"], [-25, 2, 2, "루치아노최"], [-25, 2, 7.5, "빈루즈"], [-18, 2, -12, "마담포라"], [-20, 2, -7.5, "에스투피"], [-20, 2, -2.5, "에스깔리에"], [-21, 2, 5, "이동수"], [-20, 2, 13, "몬테밀라노"],
-    [-13, 2, -12, "닥스"], [-15, 2, -7.5, "벨리시앙"], [-15, 2, -2.5, "정호진"], [-16, 2, 2.5, "리베도"], [-16, 2, 7.5, "올리비아하슬러"], [-17, 2, 13, "레노마레이디"], [-12, 2, 13, "크로커다일"], [-5, 2, -12, "리본"], [-7, 2, -5, "로잔"], [0, 2, -5, "뽀뜨레"], [-3.5, 2, 5, "엠씨"], [-8, 2, 13, "더람"], [0, 2, 0, "엘리베이터"],
-    [0, 2, 13, "우바"], [5, 2, -12, "비비안"], [7, 2, -5, "베띠앙뜨"], [5, 2, 5, "요하넥스"], [8, 2, 13, "아이잗바바"], [11, 2, -12, "비너스"], [14, 2, -12, "와코루"], [15, 2, -7.5, "에스콰이아"], [15, 2, -2.5, "바이네르"], [15, 2, 2.5, "미소페"], [15, 2, 7.5, "트리아나"], [13, 2, 13, "크레송"], [21, 2, -12, "금강 / 랜드로바"],
-    [25, 2, -7.5, "엘칸토"], [25, 2, -2.5, "닥스"], [25, 2, 2.5, "마켓"], [25, 2, 7.5, "리아트"], [22, 2, 13, "근화모피"], [30, 2, -15, "세라젬"], [33, 2, -6, "소다"], [33, 2, 5, "탠디"], [28, 2, 13, "휴테크"]]
+
+    var temp = "{{ points }}";
+    let str = temp.replace(/&#x27;/gi, "\"");
+    console.log(str);
+
+    const output = JSON.parse(str);
+    console.log(output);
+
+    maejang_location = output;
+
     var destination = {{ destination }};
     var base_position = {{ base_position }}; // 시작위치는 25
     var floor = 3;
@@ -71,9 +81,9 @@
         // fov는 시야각(값이 커질수록 멀어짐)
         // asperct는 canvas 가로 세로 비율임(이건 그냥 국룰 따라가는게 나을듯)
         // near와 far은 렌더링되는 공간범위! 이건 좁게 설정하면 피사체가 잘려나감 무조건 크게
-        camera = new THREE.PerspectiveCamera(130, window.innerWidth / window.innerHeight, 1, 2000);
+        camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 2000);
         // 첫 카메라 포지션 잡음(x, y, z) 참고로 좌, 우가 x축이고 z는 앞, 뒤이고 y가 위, 아래임
-        camera.position.set(0, 10, 35);
+        camera.position.set(10, 80, 90);
 
         // Scene 선언
         scene = new THREE.Scene();
@@ -111,7 +121,7 @@
         */
 
         //백화점 층 바닥(width, height, depth)
-        var geometry = new THREE.BoxBufferGeometry(60, 0.15, 20);
+        var geometry = new THREE.BoxBufferGeometry(100, 0.15, 20);
         var material = new THREE.MeshBasicMaterial({
             color: 0xeee6c4,
             transparent: true,
@@ -239,7 +249,7 @@
         });
 
         const root = new THREE.Object3D();
-        root.position.set(x, y, z)
+        root.position.set(x, y*6, z)
 
         const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
         root.add(body);
@@ -321,16 +331,10 @@
         var i = 0;
 
         setInterval(() => {
-            console.log("1초에 한번 ");
-
-            console.log("i=" + i);
             if (i >= root.length) {
-                console.log("0으로 바꾼다");
                 i = 0;
             }
-            var person = makePerson(root[i][0], root[i][1] * 6, root[i][2], 0x5aaef6);
-
-            console.log("사람 생성 " + root.length);
+            var person = makePerson(root[i][0], root[i][1], root[i][2], 0x5aaef6);
             setTimeout(() => {
                 scene.remove(person);
                 i++;
@@ -377,7 +381,7 @@
         requestAnimationFrame(animate);
         render();
 
-        stats.update();
+        // .update();
     }
 
     function renderScene() {

@@ -7,7 +7,7 @@ django.setup()
 from floormanage import *
     
 if __name__ == '__main__':
-    Point(id=0, name='계단1', floor=1, locationX=0, locationY=0, locationZ=0).save()
+    Point(id=0, floor=1, locationX=0, locationY=0, locationZ=0).save()
     Point(1, floor=1, locationX=-30, locationY=0, locationZ=0).save()
     Point(2, floor=1, locationX=-25, locationY=0, locationZ=0).save()
     Point(3, floor=1, locationX=-20, locationY=0, locationZ=0).save()
@@ -20,6 +20,8 @@ if __name__ == '__main__':
     Point(10, floor=1, locationX=20, locationY=0, locationZ=0).save()
     Point(11, floor=1, locationX=25, locationY=0, locationZ=0).save()
     Point(12, floor=1, locationX=30, locationY=0, locationZ=0).save()
+    Point(100, name='계단1', floor=1, locationX=0, locationY=0, locationZ=-10).save()
+    
     
     Point(101, '101호 전공강의실', 1, 25, 0, 5).save()
     Point(102, '102호 전공강의실', 1, 15, 0, 5).save()
@@ -39,6 +41,7 @@ if __name__ == '__main__':
     Point(116, 'PDA', 1, 25, 0, -5).save()
     Point(117, '노바', 1, 30, 0, -5).save()
     Point(118, '관리실', 1, 5, 0, -5).save()
+    Point(119, '입구', 1, 0, 0, 10).save()
 
  
     # 도로 연결
@@ -50,7 +53,7 @@ if __name__ == '__main__':
     connectPoints(11, 10, 12) # a19가 가운데
 
     # 가게 연결
-    connectMarketAndPoint(0, 6, 7)
+    connectMarketAndPoint(100, 0)
     connectMarketAndPoint(101, 11)
     connectMarketAndPoint(102, 10, 9)
     connectMarketAndPoint(103, 8, 7)
@@ -69,3 +72,4 @@ if __name__ == '__main__':
     connectMarketAndPoint(116, 11)
     connectMarketAndPoint(117, 12)
     connectMarketAndPoint(118, 7)
+    connectMarketAndPoint(119, 0)
