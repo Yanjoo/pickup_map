@@ -2,9 +2,23 @@ from django.db import models
 
 # Create your models here.
 
+class Club(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=10)
+    president = models.CharField(max_length=10)
+    markImage = models.ImageField()
+    members = models.IntegerField()
+    info = models.TextField()
+
+class Lab(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=10)
+    members = models.IntegerField()
+    info = models.TextField()
+
 class Point(models.Model):
     id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=20, blank=True   )
+    name = models.CharField(max_length=20, blank=True)
     floor = models.IntegerField()
     locationX = models.FloatField()
     locationY = models.FloatField()

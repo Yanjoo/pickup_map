@@ -46,3 +46,6 @@ def map(request):
         point_info = [point.locationX, point.locationY, point.locationZ, point.name]
         points.append(point_info)
     return render(request, 'main/PickupMap.html', {'destination':point_end, 'base_position': point_start, 'root':points_list, 'points': points})
+
+def detail(request, point_id):
+    pass
