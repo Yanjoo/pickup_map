@@ -3,6 +3,7 @@ from django.conf import settings
 from .models import *
 from .algorithms import *
 from .forms import *
+from .data import info
 
 
 def login(request):
@@ -13,19 +14,35 @@ def login(request):
         if form.is_valid():
             visitor = form.save(commit=False)
             visitor.save()
-            return redirect('index')
+            return redirect('index', visitor.phone)
     else:
         form = VisitorForm()
         print('로그인 생성')
     return render(request, 'main/login.html', {'form': form})
 
-def index(request):
-    return render(request, 'main/index.html')
-
+def index(request, v_id):
+    print(v_id)
+    return render(request, 'main/index.html', {"v_id": v_id})
 
 def map(request):
+    if request.method == 'POST':
+        print('검색', request.POST)
+        search = request.POST.get('search')
+        print('검색 내용', search, info.get(search))
+        search = info.get(search, 0)
+        return redirect('detail', search)
+
     start = request.GET.get('start','11') # 시작 점 
     end = request.GET.get('end','') # 종료점
+    phone = request.GET.get('phone', '')
+
+    visitor = get_object_or_404(Visitor, pk=phone)
+    visitor.startPoint = start
+    visitor.endPoint = end
+    visitor.save()
+
+    print('요청', request.GET)
+
     if end == '':
         return redirect('index')
     paths = findPath(start, end)
@@ -61,7 +78,12 @@ def map(request):
         point = get_object_or_404(Point, pk=i)
         point_info = [point.locationX, point.locationY, point.locationZ, point.name]
         points.append(point_info)
-    return render(request, 'main/PickupMap.html', {'destination':point_end, 'base_position': point_start, 'root':points_list, 'points': points})
+    return render(request, 'main/PickupMap.html', {'destination':point_end, 'base_position': point_start, 'root':points_list, 'points': points, 'phone':phone})
 
-def detail(request, point_id):
-    pass
+def detail(request, post_id):
+    if post_id == 109:
+        return render(request, 'main/studentunion.html') 
+    elif post_id >= 314 and post_id <= 320: 
+        return render(request, 'main/aziz.html')
+    elif post_id >= 323 and post_id <= 329:
+        return render(request, 'main/aziz.html')

@@ -104,7 +104,8 @@ var findPath = $('#findpath');
 $('html').on('click', '#findpath', function(e){
     var start = $('#startCode').val();
     var end = $('#endCode').val();
-    
-    location.href = `/map?start=${start}&end=${end}`;
+    var phone = $('#vId').val();
+
+    location.href = `/map?start=${start}&end=${end}&phone=${phone}`;
 })
 

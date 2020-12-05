@@ -7,6 +7,16 @@ class Visitor(models.Model):
     name = models.CharField(max_length=10)
     address = models.CharField(max_length=15)
     temperature = models.FloatField()
+    startPoint = models.CharField(max_length = 10, blank=True)
+    endPoint = models.CharField(max_length = 10, blank=True)
+
+class Professor(models.Model):
+    name = models.CharField(max_length = 15)
+    subject = models.CharField(max_length = 20)
+    email = models.EmailField()
+    site = models.CharField(max_length = 30)
+    background = models.TextField()
+    performance = models.TextField()
 
 class Manager(models.Model):
     id = models.CharField(primary_key=True, max_length=15)
@@ -17,7 +27,7 @@ class Club(models.Model):
     name = models.CharField(max_length=10)
     president = models.CharField(max_length=10)
     markImage = models.ImageField()
-    members = models.IntegerField()
+    performance = models.TextField()
     info = models.TextField()
 
 class Lab(models.Model):
