@@ -20,6 +20,12 @@ def login(request):
         print('로그인 생성')
     return render(request, 'main/login.html', {'form': form})
 
+def manage(request):
+    visitors = Visitor.objects.all()
+    print('전체 방문자', visitors)
+
+    return render(request, 'main/manage.html', {'visitors':visitors })
+
 def index(request, v_id):
     print(v_id)
     return render(request, 'main/index.html', {"v_id": v_id})

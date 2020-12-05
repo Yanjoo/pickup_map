@@ -7,4 +7,5 @@ urlpatterns = [
     path('index/', views.index, name='index'),
     path('map/', views.map, name='map'),
     path('map/detail/<int:post_id>/', views.detail, name='detail'),
+    path('manage/', views.manage, name='manage'),
 ]

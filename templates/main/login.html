@@ -36,8 +36,8 @@
 <body style="background-color: rgb(239,245,250);">
 
    <div style="text-align:center; background-color:rgb(239,245,250); height: 100%;">
-      <!-- <img src="{% static 'img/startpage.png' %}" alt="startpage"
-         style="padding-top:50px;width:500px; padding-left:500px;height:500px; float:left"> -->
+      <img src="{% static 'img/startpage.png' %}" alt="startpage"
+         style="padding-top:50px;width:500px; padding-left:500px;height:500px; float:left">
       <div style="background-color:white; margin-top:100px;display:inline;">
          <div style="padding-top:40px;"></div>
          <form action="" accept-charset="utf-8" name="#" method="post">
@@ -72,7 +72,7 @@
 
       </div>
    </div>
-   <div id="fixed1"><a href="#" style="color: black">관리자 페이지</a></div>
+   <div id="fixed1"><a href="{% url 'manage' %}" style="color: black">관리자 페이지</a></div>
 </body>
 
 </html>
