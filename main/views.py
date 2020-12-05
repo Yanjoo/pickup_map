@@ -81,9 +81,11 @@ def map(request):
     return render(request, 'main/PickupMap.html', {'destination':point_end, 'base_position': point_start, 'root':points_list, 'points': points, 'phone':phone})
 
 def detail(request, post_id):
-    if post_id == 109:
+    if post_id == 109: # 학생회실
         return render(request, 'main/studentunion.html') 
-    elif post_id >= 314 and post_id <= 320: 
+    elif post_id >= 314 and post_id <= 320:  # 교슈실
         return render(request, 'main/aziz.html')
-    elif post_id >= 323 and post_id <= 329:
+    elif post_id >= 323 and post_id <= 329: # 교수실
         return render(request, 'main/aziz.html')
+    elif post_id >= 110 and post_id <= 117: # 동아리방
+        return render(request, 'main/sammaru.html')
