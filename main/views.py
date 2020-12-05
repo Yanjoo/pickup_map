@@ -1,7 +1,23 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
-from .models import Point
+from .models import *
 from .algorithms import *
+from .forms import *
+
+
+def login(request):
+    if request.method == 'POST':
+        print('POST')
+        print('요청', request.POST)
+        form = VisitorForm(request.POST)
+        if form.is_valid():
+            visitor = form.save(commit=False)
+            visitor.save()
+            return redirect('index')
+    else:
+        form = VisitorForm()
+        print('로그인 생성')
+    return render(request, 'main/login.html', {'form': form})
 
 def index(request):
     return render(request, 'main/index.html')

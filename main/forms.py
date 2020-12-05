@@ -80,3 +80,13 @@ shops_floor2 = (
     ('베네통'),
     ('주크'),
 )
+
+from django import forms
+from . models import *
+
+class VisitorForm(forms.ModelForm):
+    class Meta:
+        model = Visitor
+        fields = ['phone', 'name', 'address', 'temperature']
+        
+

@@ -2,6 +2,16 @@ from django.db import models
 
 # Create your models here.
 
+class Visitor(models.Model):
+    phone = models.CharField(primary_key=True, max_length=15)
+    name = models.CharField(max_length=10)
+    address = models.CharField(max_length=15)
+    temperature = models.FloatField()
+
+class Manager(models.Model):
+    id = models.CharField(primary_key=True, max_length=15)
+    password = models.CharField(max_length=15)
+
 class Club(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=10)
