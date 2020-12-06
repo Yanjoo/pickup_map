@@ -46,25 +46,31 @@
         </style>
     </head>
     <body>
+    
+        <a href="{% url 'login' %}">
+            홈으로
+        </a>
+
             <div id="header"><b> 동아리 정보 </b></div>
             <br>
 
             <div id="nav1">
-              <img src = "{% static 'img/sammarumark.png' %}" width=140% height=90%>
+              <img src = "{{ club.markImage.url }}" width=140% height=90%>
             </div>
             <div id="nav0">
             <div id="nav2">
-              <h2>샘마루 (SAMMaru) </h2>
-              <p>동아리장 : 문재식 </p>
+              <h2>{{ club.name }} </h2>
+              <p>동아리장 : {{ club.president }} </p>
               <p>지도교수 : 아지즈 교수님</p>
-              <p>위치 : S4-1동 113호 </p>
+              <p>위치 : {{ club.location }} </p>
             </div>
             </div>
             <div id="content1">
               <b>동아리소개</b><br>
-              <b>동아리명 샘마루는 'Security & Algorithm Management' 의 약자 SAM(샘)과 '최고', '하늘' 을 뜻하는 순우리말 마루(Maru)를 합쳐 만들어진 보안 및 알고리즘 동아리 입니다. 보안 스터디를 통해 동아리 원들과 함께 보안에 대해 연구하고 학습하며, 알고리즘의 학습을 위해 기초프로그래밍(C, C++)을 시작으로 자료구조를 공부하고 있습니다. 또한, 실력을 키워 각종 경진대회 및 해커톤 대회에서 수상을 목적으로 하며, 공모전에도 참여하고 있습니다. 그리고 체육대회, MT등을 통해 동아리 원들과의 친목을 다지고 타 동아리와의 교류 또한 활성화하고 있습니다.</b><br>
+              <b>{{ club.info }}</b><br>
             </div>
             <div id="content2">
+              {{ club.performance }}
               <b>주요활동 및 수상실적</b><br>
               <b>2013 청년취업아카데미 학교 대표 선발</b><br>
               <b>2013 한이음 아이디어 페스티벌 우수 프로젝트 선정</b><br>

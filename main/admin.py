@@ -6,3 +6,4 @@ from .models import *
 admin.site.register(Point)
 admin.site.register(Visitor)
 admin.site.register(Club)
+admin.site.register(Professor)

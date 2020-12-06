@@ -142,7 +142,7 @@ def mapPhone(request, phone):
         point = get_object_or_404(Point, pk=i)
         point_info = [point.locationX, point.locationY, point.locationZ, point.name]
         points.append(point_info)
-    return render(request, 'main/PickupMap.html', {'destination':point_end, 'base_position': point_start, 'root':points_list, 'points': points, 'phone':phone})
+    return render(request, 'main/PickupMapCheck.html', {'destination':point_end, 'base_position': point_start, 'root':points_list, 'points': points, 'phone':phone, 'name':visitor.name })
 
 
 def detail(request, post_id):
@@ -153,7 +153,11 @@ def detail(request, post_id):
     elif post_id >= 323 and post_id <= 329: # 교수실
         return render(request, 'main/aziz.html')
     elif post_id >= 110 and post_id <= 117: # 동아리방
-        return render(request, 'main/sammaru.html')
+        club = get_object_or_404(Club, pk=post_id)
+        return render(request, 'main/sammaru.html', {'club': club})
+    elif(post_id == 101):
+        return render(request, 'main/timetable.html')
+    
 
 
 def delete(request, phone):

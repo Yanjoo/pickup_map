@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+    width : 100px;
+    height: 40px;
+}
+th, td {
+    padding: 20px;
+}
+th {
+    text-align: center;
+}
+</style>
+</head>
+<body>
+  <a href="{% url 'login' %}">
+    홈으로
+</a>
+ <h1>101호 전공강의실 시간표</h1>
+
+<table style="width:100%">
+
+  <tr>
+    <th> </th>
+    <th>월</th>
+    <th>화</th>
+    <th>수</th>
+    <th>목</th>
+    <th>금</th>
+  </tr>
+    <tr>
+    <th>1교시</th>
+    <td style = "background : ;"></td>
+    <td> </td>
+    <td style = "background : ;"></td>
+    <td style = "background : ;"></td>
+    <td style = "background : ;"></td>
+   </tr>
+    <tr>
+    <th>2교시</th>
+    <td style = "background : LavenderBlush ;"rowspan="2">시스템프로그래밍<br>조희승</td>
+	<td> </td>
+	<td style = "background : skyblue ;">클라우드컴퓨팅<br>노서영</td>
+	<td style = "background : LavenderBlush ;">시스템프로그래밍<br>조희승</td>
+    <td style = "background : Wheat ;"rowspan="3">컴퓨터교육론<br>이상호</td>
+  </tr>
+    <tr>
+    <th>3교시</th>
+    <td style = "background : LavenderBlush ;"rowspan="2">시스템프로그래밍<br>조희승</td>
+    <td style = "background : ;"></td>
+    <td style = "background : ;"></td>
+  </tr>
+   <tr>
+    <th>4교시</th>
+    <td> </td>
+    <td> </td>
+    <td style = "background : skyblue ;"rowspan="2">클라우드컴퓨팅<br>노서영</td>
+  </tr>
+   <tr>
+    <th>5교시</th>
+    <td style = "background : orange;">컴퓨터시스템개론<br>최경주</td>
+    <td style = "background : ;"></td>
+    <td style = "background : LavenderBlush ;">시스템프로그래밍<br>조희승</td>
+    <td style = "background : ;"></td>
+  </tr>
+   <tr>
+    <th>6교시</th>
+    <td> </td>
+	<td> </td>
+	<td> </td>
+	<td> </td>
+	<td> </td>
+  </tr>
+   <tr>
+    <th>7교시</th>
+    <td> </td>
+	<td style = "background : green ;"rowspan="3">제조생산데이터베이스시스템<br>송병준</td>
+	<td style = "background : yellow ;"rowspan="3">지능형 기계학습<br>이종연</td>
+	<td> </td>
+	<td> </td>
+  </tr>
+  <tr>
+   <th>8교시</th>
+   <td style = "background :;"></td>
+   <td> </td>
+   <td> </td>
+  </tr>
+  <tr>
+   <th>9교시</th>
+   <td style = "background :;"></td>
+   <td> </td>
+   <td> </td>
+  </tr>
+
+</table>
+
+</body>
+</html>
+

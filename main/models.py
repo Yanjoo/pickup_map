@@ -11,6 +11,7 @@ class Visitor(models.Model):
     endPoint = models.CharField(max_length = 10, blank=True)
 
 class Professor(models.Model):
+    id = models.CharField(primary_key=True, max_length=15)
     name = models.CharField(max_length = 15)
     subject = models.CharField(max_length = 20)
     email = models.EmailField()
@@ -25,8 +26,10 @@ class Manager(models.Model):
 class Club(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=10)
+    location = models.CharField(max_length=20, null=True, blank=True)
     president = models.CharField(max_length=10)
-    markImage = models.ImageField()
+    markImage = models.ImageField(blank = True, null=True)
+    professor = models.OneToOneField(Professor, on_delete=models.DO_NOTHING)
     performance = models.TextField()
     info = models.TextField()
 
