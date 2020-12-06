@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,6 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="{% static 'js/search.js' %}"></script>
 </head>
 
 <body>
@@ -23,13 +27,12 @@
             <td>{{visitor.phone}}</td>
             <td>{{visitor.address}}</td>
             <td>{{visitor.temperature}}</td>
-            <td><a href="#">경로</a></td>
+            <td><a href="{% url 'mapPhone' visitor.phone %}">
+                경로 {{ visitor.startPoint}} {{ visitor.endPoint}}
+            </a></td>
             <td><a href="#">삭제</a></td>
         </tr>
         {% endfor %}
-        <tr>
-
-        </tr>
     </table>
 
 
