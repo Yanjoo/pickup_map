@@ -30,7 +30,7 @@
             <td><a href="{% url 'mapPhone' visitor.phone %}">
                 경로 {{ visitor.startPoint}} {{ visitor.endPoint}}
             </a></td>
-            <td><a href="#">삭제</a></td>
+            <td><a href="{% url 'delete' visitor.phone %}">삭제</a></td>
         </tr>
         {% endfor %}
     </table>

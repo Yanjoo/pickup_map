@@ -154,3 +154,9 @@ def detail(request, post_id):
         return render(request, 'main/aziz.html')
     elif post_id >= 110 and post_id <= 117: # 동아리방
         return render(request, 'main/sammaru.html')
+
+
+def delete(request, phone):
+    visitor = get_object_or_404(Visitor, pk=phone)
+    visitor.delete()
+    return redirect('manage')
